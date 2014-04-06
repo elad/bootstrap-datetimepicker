@@ -162,7 +162,7 @@
 		if (this.isRTL) {
 			this.picker.addClass('datetimepicker-rtl');
 			if (this.bootcssVer == 3) {
-				this.picker.find('.prev span, .next span')
+				this.picker.find('.prev i, .next i')
 					.toggleClass('glyphicon-arrow-left glyphicon-arrow-right');
 			} else {
 				this.picker.find('.prev i, .next i')
@@ -429,16 +429,18 @@
 			});
 			var zIndex = index_highest + 10;
 
-			var offset, top, left;
+			var offset, top, left, right;
 			if (this.component) {
 				offset = this.component.offset();
 				left = offset.left;
+				right = $(window).width() - (left + this.picker.outerWidth() + this.component.outerWidth()); // fix this
 				if (this.pickerPosition == 'bottom-left' || this.pickerPosition == 'top-left') {
 					left += this.component.outerWidth() - this.picker.outerWidth();
 				}
 			} else {
 				offset = this.element.offset();
 				left = offset.left;
+				right = $(window).width() - (left + this.picker.outerWidth());
 			}
 			if (this.pickerPosition == 'top-left' || this.pickerPosition == 'top-right') {
 				top = offset.top - this.picker.outerHeight();
@@ -447,7 +449,8 @@
 			}
 			this.picker.css({
 				top:    top,
-				left:   left,
+				left:   ((this.component || !this.isRTL) ? left : ''),
+				right:  ((this.component || this.isRTL) ? right : ''),
 				zIndex: zIndex
 			});
 		},
