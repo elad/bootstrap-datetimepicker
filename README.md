@@ -1,3 +1,7 @@
+# Fork info
+
+This fork tries to fix right-to-left issues. See [issue #181](https://github.com/smalot/bootstrap-datetimepicker/issues/181).
+
 # Project : bootstrap-datetimepicker
 ======================================
 
